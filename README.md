@@ -1,46 +1,39 @@
-# Getting Started with Create React App
+# Amplemarket Coding Challenge
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### **Goal: Build a chrome extension that adds support for basic templates to Gmail**
 
-## Available Scripts
+People who spend a lot of time writing emails (sales reps, customer support reps, etc) know that you end up writing the same things over and over again. Templates help folks be much more efficient. By the end of this challenge, you will have a chrome extension that allows you to easily insert a reply template into a message draft within Gmail with just a couple of clicks.
 
-In the project directory, you can run:
+Below you can see an example of a chrome extension that adds templates (they call them snippets) to Gmail:
 
-### `npm start`
+[https://lh6.googleusercontent.com/I6cp9_QEuIrgSHX6_mT-IDJw7f3nbUW8Kw_hbDWl8m7JvZ3E6cYiCU8qfHNBKNkAZMkG56pwg7jYxL7sm7RWKEzPjRNrWeDlL03Io4knGWCg9ZALqYqJRfukek52fomnX8oq4zsk](https://lh6.googleusercontent.com/I6cp9_QEuIrgSHX6_mT-IDJw7f3nbUW8Kw_hbDWl8m7JvZ3E6cYiCU8qfHNBKNkAZMkG56pwg7jYxL7sm7RWKEzPjRNrWeDlL03Io4knGWCg9ZALqYqJRfukek52fomnX8oq4zsk)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Functionality requirements of the chrome extension you will build:
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- Adds a button next to the Gmail send button. When you click this button a modal opens which will show a selection of default templates (the UI doesn’t need to look exactly like the one in the picture above - tho the modal should show up next to the button that triggers it)
+- Within the **templates modal there should be an iframe with the src set to a url pointing to the backend (e.g. [https://xyz-amplemarket-challenge.herokuapp.com/templates](https://xyz-amplemarket-challenge.herokuapp.com/templates) or** https://localhost:3000/templates**).** We know there are other ways of implementing this, but we would like you to do it via an iframe. ****
+- When you click one of the templates in the list, it will insert the text of the template into the body of the draft (replacing any existing text there)
+- The extension **should work for a personal Gmail account - @gmail.com.** (vs a Google Mail on some other domain).
 
-### `npm test`
+Things you do **not** need to implement (but you can if you want to go the extra mile)**:**
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Way to create a template via the chrome extension (the list of default templates can be hardcoded)
+- Preview of template in chrome extension
+- User specific templates - the list of default templates can be the same for all users
+- Extra backend functionality - You do not need to implement user login for instance. The backend can be very simple (essentially an endpoint that serves the default templates)
 
-### `npm run build`
+Technologies we would like you to use:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- [InboxSDK](https://www.inboxsdk.com/) - SDK to build apps inside gmail
+- React.js - You should use react within the iframe which renders the template choices. If you wish you can also use it in the extension itself.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Other than InboxSDK and React you have total freedom to use whatever technologies/libraries you want.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+## How to run extension
+1. Generate new AppId for inboxSDK
+2. Open `extesions/snippets.js` and replace 'YOUR_APP_ID_HERE'
+3. In terminal go to the app folder and run yarn start
+4. Open Chrome to `chrome://extensions`
+5. Then click on "Load Unpacked Extension" and select `extension` folder.
+6. Open your inbox on Gmail and try to compose new letter
+7. Click on the new extension icon

@@ -1,6 +1,18 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "manifest_version": 2,
+  "short_name": "Templates extension",
+  "name": "Gmail templates extansion",
+  "version": "1.0",
+    "permissions": [
+    "https://mail.google.com/",
+    "https://inbox.google.com/"
+  ],
+    "content_scripts" : [
+    {
+      "matches": ["https://mail.google.com/*", "https://inbox.google.com/*"],
+      "js": ["inboxsdk.js", "myapp.js"]
+    }
+  ],
   "icons": [
     {
       "src": "favicon.ico",
@@ -23,3 +35,5 @@
   "theme_color": "#000000",
   "background_color": "#ffffff"
 }
+
+
